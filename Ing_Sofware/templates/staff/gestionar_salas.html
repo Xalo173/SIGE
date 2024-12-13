@@ -1,0 +1,32 @@
+{% extends 'staff/home.html' %}
+
+{% block content %}
+
+<h1>Gestionar Salas</h1>
+
+
+<h2>Añadir Sala</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+</form>
+
+<h2>Editar Salas</h2>
+<table class="table table-striped-columns">
+    <tr>
+        <th>Número</th>
+        <th>Disponible</th>
+        <th>Acciones</th>
+    </tr>
+    {% for sala in salas %}
+    <tr>
+        <td>{{ sala.numero_sala }}</td>
+        <td>{{ sala.disponible }}</td>
+        <td>
+            <a href="{% url 'editar_sala' sala.id %}" class="btn btn-success">Editar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{%block content%}
+
+<h1>Selecciona una sala</h1>
+<ul>
+    {% for sala in salas %}
+        <li>
+            <a href="{% url 'obtener_horarios_disponibles' sala.numero_sala %}">Sala nomer:{{ sala.numero_sala }}</a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

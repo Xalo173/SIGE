@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Calendario de Reservas{% endblock %}
+
+{% block content %}
+<h1>Reservar Sala {{ sala.numero_sala }}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Reservar</button>
+</form>
+
+<h2>Horarios disponibles</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Día</th>
+            <th>Hora Inicio</th>
+            <th>Hora Fin</th>
+            <th>Disponibilidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for horario in horarios %}
+        <tr>
+            <td>{{ horario.dia_semana }}</td>
+            <td>{{ horario.hora_inicio }}</td>
+            <td>{{ horario.hora_fin }}</td>
+            <td>
+                {% if horario.disponible %}
+                    Disponible
+                {% else %}
+                    Ocupado
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

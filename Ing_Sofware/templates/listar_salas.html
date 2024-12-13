@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Elegir Sala{% endblock %}
+
+{% block content %}
+<h1>Elige una sala</h1>
+<ul>
+    {% for sala in salas %}
+        <li>
+            <a href="{% url 'crear_reserva' sala.id %}">Sala {{ sala.numero_sala }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'staff/home.html' %}
+
+{% block content %}
+
+
+<table class="table table-striped-columns">
+    <tr>
+        <th>Sala</th>
+        <th>Día</th>
+        <th>Inicio</th>
+        <th>Fin</th>
+        <th>Disponible</th>
+        <th>Acciones</th>
+    </tr>
+    {% for horario in horarios %}
+    <tr>
+        <td>{{ horario.sala.numero_sala }}</td>
+        <td>{{ horario.dia_semana }}</td>
+        <td>{{ horario.hora_inicio }}</td>
+        <td>{{ horario.hora_fin }}</td>
+        <td>{{ horario.disponible }}</td>
+        <td>
+            <a href="{% url 'editar_horario' horario.id %}" class="btn btn-success">Editar</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+
+    <h2>Añadir Horario</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Crear Horario</button>
+    </form>
+</table>
+{% endblock %}
